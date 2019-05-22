@@ -8,6 +8,7 @@ class GameAgent
 public:
 	GameAgent();
 	void draw();
+	void run();
 
 private:
 	BoardManager boardManager_;

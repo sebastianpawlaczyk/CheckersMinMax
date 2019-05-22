@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/Checkers.dir/main.cpp.o CMakeFiles/Checkers.dir/BoardManager.cpp.o CMakeFiles/Checkers.dir/Piece.cpp.o CMakeFiles/Checkers.dir/GameAgent.cpp.o  -o Checkers 

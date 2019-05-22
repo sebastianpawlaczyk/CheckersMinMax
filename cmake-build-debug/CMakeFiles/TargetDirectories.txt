@@ -1,3 +1,0 @@
-/home/seba/CLionProjects/Checkers/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/seba/CLionProjects/Checkers/cmake-build-debug/CMakeFiles/Checkers.dir
-/home/seba/CLionProjects/Checkers/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -14,6 +14,13 @@ class Piece
 {
 public:
 	Piece();
+	void setPosition(int x, int y);
+	void setKing();
+	void setPlayer(int p);
+
+	std::pair<int,int> getPosition() const;
+	bool getIsKing() const;
+	int getPlayer() const;
 
 private:
 	std::pair<int,int> position_;
