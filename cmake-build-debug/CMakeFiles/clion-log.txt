@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/seba/CLionProjects/Checkers
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/seba/CLionProjects/Checkers/cmake-build-debug
