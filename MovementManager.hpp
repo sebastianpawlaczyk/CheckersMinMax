@@ -12,4 +12,5 @@ public:
 
 	bool isMoveValid(
 		const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
+	void makeMove(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
 };

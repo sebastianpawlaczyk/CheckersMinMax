@@ -52,9 +52,6 @@ void GameAgent::run()
 	MovementManager move;
 	int x, y;
 
-	std::cout << "Choose piece" << std::endl;
-	std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
-
 /*	while (true)
 	{
 		std::cout << "Waiting..." << std::endl;
@@ -71,33 +68,37 @@ void GameAgent::run()
 		std::cout << "Wrong co-ordinates -> try again" << std::endl;
 	}*/
 
-	std::vector<Piece>::iterator pieceIter;
 	while (true)
 	{
-		std::cout << "Waiting..." << std::endl;
-		std::cin >> x >> y;
-		pieceIter = std::find_if(this->playerPieces_.begin(), this->playerPieces_.end(),
-							  [x ,y](Piece& piece){return piece.getPosition().first == x && piece.getPosition().second == y;});
+		std::cout << "Choose piece" << std::endl;
+		std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
 
-		if (pieceIter != this->playerPieces_.end())
-		{
-			break;
+		std::vector<Piece>::iterator pieceIter;
+		while (true) {
+			std::cout << "Waiting..." << std::endl;
+			std::cin >> x >> y;
+			pieceIter = std::find_if(this->playerPieces_.begin(), this->playerPieces_.end(),
+				[x, y](Piece &piece) { return piece.getPosition().first == x && piece.getPosition().second == y; });
+
+			if (pieceIter != this->playerPieces_.end()) {
+				break;
+			}
+			std::cout << "Wrong co-ordinates -> try again" << std::endl;
 		}
-		std::cout << "Wrong co-ordinates -> try again" << std::endl;
+
+		std::cout << "Choose move" << std::endl;
+		std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
+		bool isMoveValid = false;
+
+		while (!isMoveValid) {
+			std::cout << "Waiting..." << std::endl;
+			std::cin >> x >> y;
+			isMoveValid = move.isMoveValid(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x, y});
+		}
+
+		move.makeMove(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x, y});
+		std::cout << this->boardManager_.getBoard() << std::endl;
+		isMoveValid = false;
 	}
 
-	std::cout << "Choose move" << std::endl;
-	std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
-	bool isMoveValid = false;
-	while (!isMoveValid)
-	{
-		std::cout << "Waiting..." << std::endl;
-		std::cin >> x >> y;
-		isMoveValid = move.isMoveValid(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x,y});
-	}
-
-	boardManager_.getBoard()[y][x] = '1';
-	boardManager_.getBoard()[(*pieceIter).getPosition().second][(*pieceIter).getPosition().first] = 'b';
-	(*pieceIter).setPosition(x, y);
-	std::cout << this->boardManager_.getBoard() << std::endl;
 }
