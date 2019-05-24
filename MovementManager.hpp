@@ -8,9 +8,18 @@
 class MovementManager
 {
 public:
-	MovementManager();
+	MovementManager(computerPieces& computerPieces);
 
 	bool isMoveValid(
-		const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
-	void makeMove(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
+		wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move, computerPieces& computerPieces);
+
+private:
+    void makeMove(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
+
+    bool isCapturedPossible(const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
+    void tryToSpank(const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move,
+        int& numberOfSpanks, bool isRightDirection);
+    void removeSpankedPiece(bool isRightDirection, std::pair<int, int> move);
+
+    computerPieces& computerPieces_;
 };

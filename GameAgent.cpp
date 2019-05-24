@@ -49,32 +49,26 @@ void GameAgent::draw()
 
 void GameAgent::run()
 {
-	MovementManager move;
-	int x, y;
+    // TODO @spawlacz Temporary solution
+    // When AI will be valid for computer
+    // remove this solution
+    std::cout << "fakeComputerMove -> temporary solution" << std::endl;
+    boardManager_.getBoard()[2][3] = 'b';
+    boardManager_.getBoard()[3][2] = '0';
+    boardManager_.getBoard()[0][5] = 'b';
 
-/*	while (true)
-	{
-		std::cout << "Waiting..." << std::endl;
-		std::cin >> x >> y;
-		bool found = false;
-		for (const auto &i : this->playerPieces_)
-		{
-			if (i.getPosition().first == x && i.getPosition().second == y)
-			{
-				found = true;
-			}
-		}
-		if (found) break;
-		std::cout << "Wrong co-ordinates -> try again" << std::endl;
-	}*/
+	MovementManager move(computerPieces_);
+	int x, y;
 
 	while (true)
 	{
+	    //-----------------playerMove----------------------------------------------------------------
 		std::cout << "Choose piece" << std::endl;
 		std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
 
 		std::vector<Piece>::iterator pieceIter;
-		while (true) {
+		while (true)
+		{
 			std::cout << "Waiting..." << std::endl;
 			std::cin >> x >> y;
 			pieceIter = std::find_if(this->playerPieces_.begin(), this->playerPieces_.end(),
@@ -90,15 +84,18 @@ void GameAgent::run()
 		std::cout << "(x,y) after whitespace, e.x -> 4 7" << std::endl;
 		bool isMoveValid = false;
 
-		while (!isMoveValid) {
+		while (!isMoveValid)
+		{
 			std::cout << "Waiting..." << std::endl;
 			std::cin >> x >> y;
-			isMoveValid = move.isMoveValid(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x, y});
+			isMoveValid = move.isMoveValid(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x, y}, computerPieces_);
 		}
 
-		move.makeMove(boardManager_.getBoard(), pieceIter, std::pair<int, int>{x, y});
-		std::cout << this->boardManager_.getBoard() << std::endl;
 		isMoveValid = false;
-	}
 
+        // TODO @spawlacz Temporary solution
+        // Here should be computer Ai move
+
+        std::cout << this->boardManager_.getBoard() << std::endl;
+	}
 }
