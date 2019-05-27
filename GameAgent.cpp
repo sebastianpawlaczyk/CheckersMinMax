@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 
+#include "AI.h"
 #include "MovementManager.hpp"
 
 GameAgent::GameAgent()
@@ -49,15 +50,7 @@ void GameAgent::draw()
 
 void GameAgent::run()
 {
-    // TODO @spawlacz Temporary solution
-    // When AI will be valid for computer
-    // remove this solution
-    std::cout << "fakeComputerMove -> temporary solution" << std::endl;
-    boardManager_.getBoard()[2][3] = 'b';
-    boardManager_.getBoard()[3][2] = '0';
-    boardManager_.getBoard()[0][5] = 'b';
-
-	MovementManager move(computerPieces_);
+    MovementManager move(computerPieces_);
 	int x, y;
 
 	while (true)
@@ -93,8 +86,8 @@ void GameAgent::run()
 
 		isMoveValid = false;
 
-        // TODO @spawlacz Temporary solution
-        // Here should be computer Ai move
+        AI ai(boardManager_.getBoard(), computerPieces_, playerPieces_);
+        ai.minmax(true, boardManager_.getBoard(), 0);
 
         std::cout << this->boardManager_.getBoard() << std::endl;
 	}
