@@ -89,6 +89,10 @@ void GameAgent::run()
         AI ai(boardManager_.getBoard(), computerPieces_, playerPieces_);
         ai.minmax(true, boardManager_.getBoard(), 0);
 
+        //GUI
+		std::cout << std::endl << "----------------------------------------" << std::endl;
         std::cout << this->boardManager_.getBoard() << std::endl;
+        std::cout << "Computer Pieces: " << this->computerPieces_.size() << std::endl;
+        std::cout << "Player Pieces: " << this->playerPieces_.size() << std::endl;
 	}
 }

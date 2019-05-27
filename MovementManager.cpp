@@ -38,7 +38,7 @@ bool MovementManager::isMoveValid(
 	return true;
 }
 
-bool MovementManager::isCapturedPossible(const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move)
+bool MovementManager::isCapturedPossible(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move)
 {
 	bool isRightDirection = true;
 	if ((*pieceIter).getPosition().first > move.first) // we try to spank by left diagonal
@@ -57,7 +57,7 @@ bool MovementManager::isCapturedPossible(const wholeBoard& board, const std::vec
 	return numberOfSpanks > 0;
 }
 
-void MovementManager::tryToSpank(const wholeBoard &board, const std::vector<Piece>::iterator &pieceIter,
+void MovementManager::tryToSpank(wholeBoard &board, const std::vector<Piece>::iterator &pieceIter,
 	std::pair<int, int> move, int& numberOfSpanks, bool isRightDirection)
 {
 	if (isRightDirection)
@@ -74,23 +74,25 @@ void MovementManager::tryToSpank(const wholeBoard &board, const std::vector<Piec
 			return;
 		}
 	}
-	removeSpankedPiece(isRightDirection, move);
+	removeSpankedPiece(board, isRightDirection, move);
 	numberOfSpanks++;
 }
 
-void MovementManager::removeSpankedPiece(bool isRightDirection, std::pair<int, int> move)
+void MovementManager::removeSpankedPiece(wholeBoard& board, bool isRightDirection, std::pair<int, int> move)
 {
 	if (isRightDirection)
 	{
 		computerPieces_.erase(std::remove_if(computerPieces_.begin(), computerPieces_.end(), [&move](Piece &piece) {
 			return (piece.getPosition().first == (move.first - 1) && piece.getPosition().second == (move.second + 1));
-		}),computerPieces_.end());
+		}));
+        board[move.second + 1][move.first - 1] = 'b';
 	}
 	if (!isRightDirection)
 	{
 		computerPieces_.erase(std::remove_if(computerPieces_.begin(), computerPieces_.end(), [&move](Piece &piece) {
 			return (piece.getPosition().first == (move.first + 1) && piece.getPosition().second == (move.second + 1));
-		}),computerPieces_.end());
+		}));
+        board[move.second + 1][move.first + 1] = 'b';
 	}
 	for (const auto& i: computerPieces_)
 	{

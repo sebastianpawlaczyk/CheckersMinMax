@@ -16,10 +16,10 @@ public:
 private:
     void makeMove(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
 
-    bool isCapturedPossible(const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
-    void tryToSpank(const wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move,
+    bool isCapturedPossible(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move);
+    void tryToSpank(wholeBoard& board, const std::vector<Piece>::iterator& pieceIter, std::pair<int, int> move,
         int& numberOfSpanks, bool isRightDirection);
-    void removeSpankedPiece(bool isRightDirection, std::pair<int, int> move);
+    void removeSpankedPiece(wholeBoard& board, bool isRightDirection, std::pair<int, int> move);
 
     computerPieces& computerPieces_;
 };
