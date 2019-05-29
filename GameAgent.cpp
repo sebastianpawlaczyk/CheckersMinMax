@@ -93,6 +93,14 @@ void GameAgent::run()
 		std::cout << std::endl << "----------------------------------------" << std::endl;
         std::cout << this->boardManager_.getBoard() << std::endl;
         std::cout << "Computer Pieces: " << this->computerPieces_.size() << std::endl;
+        for (const auto& i : computerPieces_)
+        {
+            std::cout << "x : " << i.getPosition().first << " y: " << i.getPosition().second << std::endl;
+        }
         std::cout << "Player Pieces: " << this->playerPieces_.size() << std::endl;
+        for (const auto& i : playerPieces_)
+        {
+            std::cout << "x : " << i.getPosition().first << " y: " << i.getPosition().second << std::endl;
+        }
 	}
 }

@@ -162,9 +162,29 @@ bool AI::isAbilityToCaptured(wholeBoard& board, std::pair<int, int> computerPosi
     }
     if (inScope && board[possibleMove.second][possibleMove.first] == 'b')
     {
-        if (board[possibleMove.second -1][possibleMove.first + 1] == '1') // left direction
+        if (board[possibleMove.second - 1][possibleMove.first + 1] == '1') // left direction
         {
             isLeftDirection = true;
+            makeMove(board_, computerPosition, possibleMove);
+            removeSpankedPiece(board_, possibleMove, isLeftDirection);
+            isAbilityToCaptured(board_, std::pair<int, int>{possibleMove.first, possibleMove.second});
+            return true;
+        }
+    }
+
+    possibleMove.first = computerPosition.first + 2;
+    possibleMove.second = computerPosition.second + 2;
+    inScope = true;
+
+    if (possibleMove.first < 0 || possibleMove.second > 7)
+    {
+        inScope = false;
+    }
+    if (inScope && board[possibleMove.second][possibleMove.first] == 'b')
+    {
+        if (board[possibleMove.second - 1][possibleMove.first - 1] == '1') // right direction
+        {
+            isLeftDirection = false;
             makeMove(board_, computerPosition, possibleMove);
             removeSpankedPiece(board_, possibleMove, isLeftDirection);
             isAbilityToCaptured(board_, std::pair<int, int>{possibleMove.first, possibleMove.second});
@@ -198,6 +218,9 @@ void AI::removeSpankedPiece(wholeBoard& board, std::pair<int, int> move, bool is
     }
     if (!isLeftDirection)
     {
-
+        playerPieces_.erase(std::find_if(playerPieces_.begin(), playerPieces_.end(), [&move](Piece &piece) {
+            return (piece.getPosition().first == (move.first - 1) && piece.getPosition().second == (move.second - 1));
+        }));
+        board[move.second - 1][move.first - 1] = 'b';
     }
 }
