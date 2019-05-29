@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-
+#include <syslog.h>
 #include "AI.h"
 #include "MovementManager.hpp"
 
@@ -87,7 +87,7 @@ void GameAgent::run()
 		isMoveValid = false;
 
         AI ai(boardManager_.getBoard(), computerPieces_, playerPieces_);
-        ai.minmax(true, boardManager_.getBoard(), 0);
+        ai.minmax(true, boardManager_.getBoard(), computerPieces_, playerPieces_, 0);
 
         //GUI
 		std::cout << std::endl << "----------------------------------------" << std::endl;
